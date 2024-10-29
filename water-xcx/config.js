@@ -1,11 +1,11 @@
 // 应用全局配置
 module.exports = {
-  baseUrl: 'https://vue.ruoyi.vip/prod-api',
-  // baseUrl: 'http://localhost:8080',
+  // baseUrl: 'https://vue.ruoyi.vip/prod-api',
+  baseUrl: 'http://localhost:8080',
   // 应用信息
   appInfo: {
     // 应用名称
-    name: "ruoyi-app",
+    name: "大荔绿泉小程序",
     // 应用版本
     version: "1.1.0",
     // 应用logo
