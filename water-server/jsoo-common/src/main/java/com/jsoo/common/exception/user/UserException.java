@@ -5,7 +5,7 @@ import com.jsoo.common.exception.base.BaseException;
 /**
  * 用户信息异常类
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class UserException extends BaseException
 {

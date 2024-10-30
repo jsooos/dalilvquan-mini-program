@@ -7,7 +7,7 @@ import com.jsoo.common.utils.DateUtils;
 /**
  * JVM相关信息
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class Jvm
 {

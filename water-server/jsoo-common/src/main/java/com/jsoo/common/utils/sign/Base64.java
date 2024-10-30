@@ -3,7 +3,7 @@ package com.jsoo.common.utils.sign;
 /**
  * Base64工具类
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public final class Base64
 {

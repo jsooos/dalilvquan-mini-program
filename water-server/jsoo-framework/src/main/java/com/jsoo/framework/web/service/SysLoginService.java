@@ -32,7 +32,7 @@ import com.jsoo.system.service.ISysUserService;
 /**
  * 登录校验方法
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @Component
 public class SysLoginService

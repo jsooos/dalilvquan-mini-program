@@ -6,7 +6,7 @@ import com.jsoo.common.utils.StringUtils;
 /**
  * 定时任务调度测试
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @Component("ryTask")
 public class RyTask

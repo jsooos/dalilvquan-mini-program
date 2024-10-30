@@ -12,7 +12,7 @@ import com.jsoo.common.enums.DesensitizedType;
 /**
  * 数据脱敏注解
  *
- * @author ruoyi
+ * @author jsoo
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

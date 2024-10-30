@@ -6,7 +6,7 @@ import com.jsoo.system.domain.SysConfig;
 /**
  * 参数配置 服务层
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public interface ISysConfigService
 {

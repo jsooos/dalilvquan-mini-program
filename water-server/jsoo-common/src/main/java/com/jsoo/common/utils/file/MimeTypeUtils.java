@@ -3,7 +3,7 @@ package com.jsoo.common.utils.file;
 /**
  * 媒体类型工具类
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class MimeTypeUtils
 {

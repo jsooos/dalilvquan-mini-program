@@ -34,7 +34,7 @@ import com.jsoo.system.service.ISysUserService;
 /**
  * 用户 业务层处理
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @Service
 public class SysUserServiceImpl implements ISysUserService

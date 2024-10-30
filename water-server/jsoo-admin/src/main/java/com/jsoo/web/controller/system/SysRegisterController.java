@@ -14,7 +14,7 @@ import com.jsoo.system.service.ISysConfigService;
 /**
  * 注册验证
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @RestController
 public class SysRegisterController extends BaseController

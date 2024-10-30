@@ -15,7 +15,7 @@ import com.jsoo.common.utils.StringUtils;
 /**
  * Filter配置
  *
- * @author ruoyi
+ * @author jsoo
  */
 @Configuration
 public class FilterConfig

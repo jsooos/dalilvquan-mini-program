@@ -12,7 +12,7 @@ import com.jsoo.common.core.domain.BaseEntity;
 /**
  * 岗位表 sys_post
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class SysPost extends BaseEntity
 {

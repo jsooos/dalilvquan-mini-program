@@ -6,7 +6,7 @@ import com.jsoo.common.core.domain.entity.SysUser;
 /**
  * 用户 业务层
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public interface ISysUserService
 {

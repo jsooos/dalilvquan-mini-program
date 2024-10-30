@@ -5,7 +5,7 @@ import com.jsoo.common.utils.StringUtils;
 /**
  * 缓存信息
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class SysCache
 {

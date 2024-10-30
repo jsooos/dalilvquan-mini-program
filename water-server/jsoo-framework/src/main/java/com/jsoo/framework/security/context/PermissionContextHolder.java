@@ -7,7 +7,7 @@ import com.jsoo.common.core.text.Convert;
 /**
  * 权限信息
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class PermissionContextHolder
 {

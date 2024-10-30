@@ -21,7 +21,7 @@ import com.jsoo.system.service.ISysUserService;
 /**
  * 注册校验方法
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @Component
 public class SysRegisterService

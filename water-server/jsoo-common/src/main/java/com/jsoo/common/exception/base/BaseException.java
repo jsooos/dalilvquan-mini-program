@@ -6,7 +6,7 @@ import com.jsoo.common.utils.StringUtils;
 /**
  * 基础异常
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class BaseException extends RuntimeException
 {

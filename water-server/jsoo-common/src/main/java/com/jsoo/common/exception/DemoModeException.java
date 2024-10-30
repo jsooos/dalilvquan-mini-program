@@ -3,7 +3,7 @@ package com.jsoo.common.exception;
 /**
  * 演示模式异常
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class DemoModeException extends RuntimeException
 {

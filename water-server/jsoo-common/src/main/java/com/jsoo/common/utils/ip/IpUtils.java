@@ -9,7 +9,7 @@ import com.jsoo.common.utils.StringUtils;
 /**
  * 获取IP方法
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class IpUtils
 {

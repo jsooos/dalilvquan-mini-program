@@ -3,7 +3,7 @@ package com.jsoo.system.domain;
 /**
  * 当前在线会话
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class SysUserOnline
 {

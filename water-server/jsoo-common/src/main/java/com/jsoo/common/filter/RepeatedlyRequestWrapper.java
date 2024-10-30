@@ -15,7 +15,7 @@ import com.jsoo.common.constant.Constants;
 /**
  * 构建可重复读取inputStream的request
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class RepeatedlyRequestWrapper extends HttpServletRequestWrapper
 {

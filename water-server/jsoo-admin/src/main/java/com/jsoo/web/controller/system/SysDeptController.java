@@ -25,7 +25,7 @@ import com.jsoo.system.service.ISysDeptService;
 /**
  * 部门信息
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @RestController
 @RequestMapping("/system/dept")

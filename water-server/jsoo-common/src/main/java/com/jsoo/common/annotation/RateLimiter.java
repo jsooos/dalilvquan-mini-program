@@ -11,7 +11,7 @@ import com.jsoo.common.enums.LimitType;
 /**
  * 限流注解
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

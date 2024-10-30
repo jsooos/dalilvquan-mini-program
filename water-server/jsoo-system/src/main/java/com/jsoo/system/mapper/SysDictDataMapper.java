@@ -7,7 +7,7 @@ import com.jsoo.common.core.domain.entity.SysDictData;
 /**
  * 字典表 数据层
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public interface SysDictDataMapper
 {

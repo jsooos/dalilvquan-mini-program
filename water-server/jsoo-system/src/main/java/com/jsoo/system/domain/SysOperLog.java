@@ -9,7 +9,7 @@ import com.jsoo.common.core.domain.BaseEntity;
 /**
  * 操作日志记录表 oper_log
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class SysOperLog extends BaseEntity
 {

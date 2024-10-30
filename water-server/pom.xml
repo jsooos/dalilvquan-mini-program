@@ -12,7 +12,7 @@
     <description>大荔绿泉小程序</description>
     
     <properties>
-        <ruoyi.version>3.8.8</ruoyi.version>
+        <jsoo.version>3.8.8</jsoo.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -150,35 +150,35 @@
             <dependency>
                 <groupId>com.jsoo</groupId>
                 <artifactId>jsoo-quartz</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${jsoo.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
                 <groupId>com.jsoo</groupId>
                 <artifactId>jsoo-generator</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${jsoo.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
                 <groupId>com.jsoo</groupId>
                 <artifactId>jsoo-framework</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${jsoo.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
                 <groupId>com.jsoo</groupId>
                 <artifactId>jsoo-system</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${jsoo.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.jsoo</groupId>
                 <artifactId>jsoo-common</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${jsoo.version}</version>
             </dependency>
 
         </dependencies>

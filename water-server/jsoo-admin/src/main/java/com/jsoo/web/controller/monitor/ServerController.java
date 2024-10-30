@@ -10,7 +10,7 @@ import com.jsoo.framework.web.domain.Server;
 /**
  * 服务器监控
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @RestController
 @RequestMapping("/monitor/server")

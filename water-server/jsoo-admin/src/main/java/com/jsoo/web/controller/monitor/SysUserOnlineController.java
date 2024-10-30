@@ -26,7 +26,7 @@ import com.jsoo.system.service.ISysUserOnlineService;
 /**
  * 在线用户监控
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @RestController
 @RequestMapping("/monitor/online")

@@ -28,7 +28,7 @@ import com.jsoo.system.service.ISysRoleService;
 /**
  * 角色 业务层处理
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @Service
 public class SysRoleServiceImpl implements ISysRoleService

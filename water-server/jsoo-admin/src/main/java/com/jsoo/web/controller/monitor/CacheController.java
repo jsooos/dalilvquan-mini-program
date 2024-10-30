@@ -25,7 +25,7 @@ import com.jsoo.system.domain.SysCache;
 /**
  * 缓存监控
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @RestController
 @RequestMapping("/monitor/cache")

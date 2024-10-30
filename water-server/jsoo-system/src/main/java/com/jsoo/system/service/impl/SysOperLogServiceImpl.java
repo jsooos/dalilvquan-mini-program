@@ -10,7 +10,7 @@ import com.jsoo.system.service.ISysOperLogService;
 /**
  * 操作日志 服务层处理
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @Service
 public class SysOperLogServiceImpl implements ISysOperLogService

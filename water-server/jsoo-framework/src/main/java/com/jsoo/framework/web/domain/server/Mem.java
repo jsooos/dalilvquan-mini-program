@@ -5,7 +5,7 @@ import com.jsoo.common.utils.Arith;
 /**
  * 內存相关信息
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class Mem
 {

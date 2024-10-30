@@ -3,7 +3,7 @@ package com.jsoo.common.exception;
 /**
  * 全局异常
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class GlobalException extends RuntimeException
 {

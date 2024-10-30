@@ -9,7 +9,7 @@ import com.jsoo.system.service.ISysUserOnlineService;
 /**
  * 在线用户 服务层处理
  * 
- * @author ruoyi
+ * @author jsoo
  */
 @Service
 public class SysUserOnlineServiceImpl implements ISysUserOnlineService

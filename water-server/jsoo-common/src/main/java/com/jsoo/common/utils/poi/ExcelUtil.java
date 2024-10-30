@@ -74,7 +74,7 @@ import com.jsoo.common.annotation.Excel;
 import com.jsoo.common.annotation.Excel.ColumnType;
 import com.jsoo.common.annotation.Excel.Type;
 import com.jsoo.common.annotation.Excels;
-import com.jsoo.common.config.RuoYiConfig;
+import com.jsoo.common.config.JsooConfig;
 import com.jsoo.common.core.domain.AjaxResult;
 import com.jsoo.common.core.text.Convert;
 import com.jsoo.common.exception.UtilException;
@@ -89,7 +89,7 @@ import com.jsoo.common.utils.reflect.ReflectUtils;
 /**
  * Excel相关处理
  * 
- * @author ruoyi
+ * @author jsoo
  */
 public class ExcelUtil<T>
 {
@@ -1409,7 +1409,7 @@ public class ExcelUtil<T>
      */
     public String getAbsoluteFile(String filename)
     {
-        String downloadPath = RuoYiConfig.getDownloadPath() + filename;
+        String downloadPath = JsooConfig.getDownloadPath() + filename;
         File desc = new File(downloadPath);
         if (!desc.getParentFile().exists())
         {
