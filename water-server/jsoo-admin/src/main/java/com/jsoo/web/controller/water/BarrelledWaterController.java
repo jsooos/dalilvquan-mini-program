@@ -77,6 +77,10 @@ public class BarrelledWaterController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody BarrelledWater barrelledWater)
     {
+        //判断水票价格不能大于桶装水的价格
+        if (barrelledWater.getCouponPrice().compareTo(barrelledWater.getWaterPrice())>0){
+            return error("水票售价不能大于桶装水售价");
+        }
         return toAjax(barrelledWaterService.insertBarrelledWater(barrelledWater));
     }
 
@@ -88,6 +92,10 @@ public class BarrelledWaterController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody BarrelledWater barrelledWater)
     {
+        //判断水票价格不能大于桶装水的价格
+        if (barrelledWater.getCouponPrice().compareTo(barrelledWater.getWaterPrice())>0){
+            return error("水票售价不能大于桶装水售价");
+        }
         return toAjax(barrelledWaterService.updateBarrelledWater(barrelledWater));
     }
 

@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="waterType"    column="water_type"    />
         <result property="waterCapacity"    column="water_capacity"    />
         <result property="waterPrice"    column="water_price"    />
+        <result property="couponPrice"    column="coupon_price"    />
         <result property="waterImage"    column="water_image"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="createBy"    column="create_by"    />
@@ -20,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBarrelledWaterVo">
-        select water_id, water_name, water_type, water_capacity, water_price, water_image, del_flag, create_by, create_time, update_by, update_time, remark from jsoo_barrelled_water
+        select water_id, water_name, water_type, water_capacity, water_price, coupon_price, water_image, del_flag, create_by, create_time, update_by, update_time, remark from jsoo_water
     </sql>
 
     <select id="selectBarrelledWaterList" parameterType="BarrelledWater" resultMap="BarrelledWaterResult">
@@ -30,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="waterType != null  and waterType != ''"> and water_type = #{waterType}</if>
         <if test="waterCapacity != null  and waterCapacity != ''"> and water_capacity = #{waterCapacity}</if>
         <if test="waterPrice != null "> and water_price = #{waterPrice}</if>
+        <if test="couponPrice != null "> and coupon_price = #{couponPrice}</if>
         <if test="waterImage != null  and waterImage != ''"> and water_image = #{waterImage}</if>
     </select>
     
@@ -39,12 +41,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="insertBarrelledWater" parameterType="BarrelledWater" useGeneratedKeys="true" keyProperty="waterId">
-        insert into jsoo_barrelled_water
+        insert into jsoo_water
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="waterName != null">water_name,</if>
             <if test="waterType != null">water_type,</if>
             <if test="waterCapacity != null">water_capacity,</if>
             <if test="waterPrice != null">water_price,</if>
+            <if test="couponPrice != null">coupon_price,</if>
             <if test="waterImage != null">water_image,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
@@ -58,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="waterType != null">#{waterType},</if>
             <if test="waterCapacity != null">#{waterCapacity},</if>
             <if test="waterPrice != null">#{waterPrice},</if>
+            <if test="couponPrice != null">#{couponPrice},</if>
             <if test="waterImage != null">#{waterImage},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
@@ -69,12 +73,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateBarrelledWater" parameterType="BarrelledWater">
-        update jsoo_barrelled_water
+        update jsoo_water
         <trim prefix="SET" suffixOverrides=",">
             <if test="waterName != null">water_name = #{waterName},</if>
             <if test="waterType != null">water_type = #{waterType},</if>
             <if test="waterCapacity != null">water_capacity = #{waterCapacity},</if>
             <if test="waterPrice != null">water_price = #{waterPrice},</if>
+            <if test="couponPrice != null">coupon_price = #{couponPrice},</if>
             <if test="waterImage != null">water_image = #{waterImage},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
@@ -87,11 +92,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteBarrelledWaterByWaterId" parameterType="Long">
-        update jsoo_barrelled_water set del_flag = 'Y' where water_id = #{waterId}
+        update jsoo_water set del_flag = 'Y' where water_id = #{waterId}
     </delete>
 
     <delete id="deleteBarrelledWaterByWaterIds" parameterType="String">
-        update jsoo_barrelled_water set del_flag = 'Y' where water_id in
+        update jsoo_water set del_flag = 'Y' where water_id in
         <foreach item="waterId" collection="array" open="(" separator="," close=")">
             #{waterId}
         </foreach>

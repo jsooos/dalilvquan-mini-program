@@ -9,14 +9,6 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="售价" prop="waterPrice">
-        <el-input
-          v-model="queryParams.waterPrice"
-          placeholder="请输入售价"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -67,8 +59,9 @@
           <dict-tag :options="dict.type.water_bucket_type" :value="scope.row.waterType"/>
         </template>
       </el-table-column>
-      <el-table-column label="容量（元）" align="center" prop="waterCapacity" />
-      <el-table-column label="售价" align="center" prop="waterPrice" />
+      <el-table-column label="容量" align="center" prop="waterCapacity" />
+      <el-table-column label="售价（元）" align="center" prop="waterPrice" />
+      <el-table-column label="水票售价（元）" align="center" prop="couponPrice" />
       <el-table-column label="图片" align="center" prop="waterImage" width="100">
         <template slot-scope="scope">
           <image-preview :src="scope.row.waterImage" :width="50" :height="50"/>
@@ -121,8 +114,11 @@
         <el-form-item label="容量" prop="waterCapacity">
           <el-input v-model="form.waterCapacity" placeholder="请输入容量" />
         </el-form-item>
-        <el-form-item label="售价" prop="waterPrice">
+        <el-form-item label="售价（元）" prop="waterPrice">
           <el-input type="number" v-model="form.waterPrice" placeholder="请输入售价" />
+        </el-form-item>
+        <el-form-item label="水票售价（元）" prop="couponPrice">
+          <el-input type="number" v-model="form.couponPrice" placeholder="请输入售价" />
         </el-form-item>
         <el-form-item label="图片" prop="waterImage">
           <image-upload limit="1" fileSize="1" v-model="form.waterImage"/>
@@ -173,12 +169,31 @@ export default {
         waterType: null,
         waterCapacity: null,
         waterPrice: null,
+        couponPrice: null,
         waterImage: null,
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
+        waterName: [
+          { required: true, message: "名称不能为空", trigger: "blur" }
+        ],
+        waterType: [
+          { required: true, message: "类型不能为空", trigger: "change" }
+        ],
+        waterCapacity: [
+          { required: true, message: "容量不能为空", trigger: "blur" }
+        ],
+        waterPrice: [
+          { required: true, message: "售价不能为空", trigger: "blur" }
+        ],
+        couponPrice: [
+          { required: true, message: "水票售价不能为空", trigger: "blur" }
+        ],
+        waterImage: [
+          { required: true, message: "图片不能为空", trigger: "blur" }
+        ],
       }
     };
   },

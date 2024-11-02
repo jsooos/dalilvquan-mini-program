@@ -33,8 +33,12 @@ public class BarrelledWater extends BaseEntity
     private String waterCapacity;
 
     /** 售价（元） */
-    @Excel(name = "售价", readConverterExp = "元=")
+    @Excel(name = "售价")
     private BigDecimal waterPrice;
+
+    /** 售价（元） */
+    @Excel(name = "水票售价")
+    private BigDecimal couponPrice;
 
     /** 图片 */
     @Excel(name = "图片")
@@ -89,7 +93,16 @@ public class BarrelledWater extends BaseEntity
     {
         return waterPrice;
     }
-    public void setWaterImage(String waterImage) 
+
+    public BigDecimal getCouponPrice() {
+        return couponPrice;
+    }
+
+    public void setCouponPrice(BigDecimal couponPrice) {
+        this.couponPrice = couponPrice;
+    }
+
+    public void setWaterImage(String waterImage)
     {
         this.waterImage = waterImage;
     }
@@ -115,6 +128,7 @@ public class BarrelledWater extends BaseEntity
             .append("waterType", getWaterType())
             .append("waterCapacity", getWaterCapacity())
             .append("waterPrice", getWaterPrice())
+            .append("couponPrice", getCouponPrice())
             .append("waterImage", getWaterImage())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
