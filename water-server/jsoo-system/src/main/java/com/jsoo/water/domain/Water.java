@@ -13,7 +13,7 @@ import com.jsoo.common.annotation.Excel;
  * @author 辛浩杰
  * @date 2024-10-30
  */
-public class BarrelledWater extends BaseEntity
+public class Water extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 

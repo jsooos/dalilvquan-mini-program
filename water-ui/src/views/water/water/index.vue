@@ -23,7 +23,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['water:barrelledWater:add']"
+          v-hasPermi="['water:water:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -34,7 +34,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['water:barrelledWater:edit']"
+          v-hasPermi="['water:water:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -45,13 +45,13 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['water:barrelledWater:remove']"
+          v-hasPermi="['water:water:remove']"
         >删除</el-button>
       </el-col>
 <!--      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>-->
     </el-row>
 
-    <el-table v-loading="loading" :data="barrelledWaterList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="waterList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="名称" align="center" prop="waterName" />
       <el-table-column label="类型" align="center" prop="waterType">
@@ -75,14 +75,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['water:barrelledWater:edit']"
+            v-hasPermi="['water:water:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['water:barrelledWater:remove']"
+            v-hasPermi="['water:water:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -97,35 +97,52 @@
     />
 
     <!-- 添加或修改桶装水信息对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="名称" prop="waterName">
-          <el-input v-model="form.waterName" placeholder="请输入名称" />
-        </el-form-item>
-        <el-form-item label="类型" prop="waterType">
-          <el-radio-group v-model="form.waterType">
-            <el-radio
-              v-for="dict in dict.type.water_bucket_type"
-              :key="dict.value"
-              :label="dict.value"
-            >{{dict.label}}</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="容量" prop="waterCapacity">
-          <el-input v-model="form.waterCapacity" placeholder="请输入容量" />
-        </el-form-item>
-        <el-form-item label="售价（元）" prop="waterPrice">
-          <el-input type="number" v-model="form.waterPrice" placeholder="请输入售价" />
-        </el-form-item>
-        <el-form-item label="水票售价（元）" prop="couponPrice">
-          <el-input type="number" v-model="form.couponPrice" placeholder="请输入售价" />
-        </el-form-item>
-        <el-form-item label="图片" prop="waterImage">
-          <image-upload limit="1" fileSize="1" v-model="form.waterImage"/>
-        </el-form-item>
-<!--        <el-form-item label="备注" prop="remark">-->
-<!--          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />-->
-<!--        </el-form-item>-->
+    <el-dialog :title="title" :visible.sync="open" width="60%" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="130px">
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="名称" prop="waterName">
+              <el-input v-model="form.waterName" placeholder="请输入名称" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="类型" prop="waterType">
+              <el-radio-group v-model="form.waterType">
+                <el-radio
+                  v-for="dict in dict.type.water_bucket_type"
+                  :key="dict.value"
+                  :label="dict.value"
+                >{{dict.label}}</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="容量" prop="waterCapacity">
+              <el-input v-model="form.waterCapacity" placeholder="请输入容量" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="售价（元）" prop="waterPrice">
+              <el-input type="number" v-model="form.waterPrice" placeholder="请输入售价" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="水票售价（元）" prop="couponPrice">
+              <el-input type="number" v-model="form.couponPrice" placeholder="请输入售价" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="图片" prop="waterImage">
+              <image-upload limit="1" fileSize="1" v-model="form.waterImage"/>
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -136,10 +153,10 @@
 </template>
 
 <script>
-import { listBarrelledWater, getBarrelledWater, delBarrelledWater, addBarrelledWater, updateBarrelledWater } from "@/api/water/barrelledWater";
+import { listWater, getWater, delWater, addWater, updateWater } from "@/api/water/water";
 
 export default {
-  name: "BarrelledWater",
+  name: "Water",
   dicts: ['water_bucket_type'],
   data() {
     return {
@@ -156,7 +173,7 @@ export default {
       // 总条数
       total: 0,
       // 桶装水信息表格数据
-      barrelledWaterList: [],
+      waterList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -204,8 +221,8 @@ export default {
     /** 查询桶装水信息列表 */
     getList() {
       this.loading = true;
-      listBarrelledWater(this.queryParams).then(response => {
-        this.barrelledWaterList = response.rows;
+      listWater(this.queryParams).then(response => {
+        this.waterList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
@@ -258,7 +275,7 @@ export default {
     handleUpdate(row) {
       this.reset();
       const waterId = row.waterId || this.ids
-      getBarrelledWater(waterId).then(response => {
+      getWater(waterId).then(response => {
         this.form = response.data;
         this.open = true;
         this.title = "修改桶装水信息";
@@ -269,13 +286,13 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.waterId != null) {
-            updateBarrelledWater(this.form).then(response => {
+            updateWater(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addBarrelledWater(this.form).then(response => {
+            addWater(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -288,7 +305,7 @@ export default {
     handleDelete(row) {
       const waterIds = row.waterId || this.ids;
       this.$modal.confirm('是否确认删除桶装水信息编号为"' + waterIds + '"的数据项？').then(function() {
-        return delBarrelledWater(waterIds);
+        return delWater(waterIds);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
@@ -296,9 +313,9 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
-      this.download('water/barrelledWater/export', {
+      this.download('water/water/export', {
         ...this.queryParams
-      }, `barrelledWater_${new Date().getTime()}.xlsx`)
+      }, `water_${new Date().getTime()}.xlsx`)
     }
   }
 };

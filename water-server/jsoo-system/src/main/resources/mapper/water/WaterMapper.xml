@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jsoo.water.mapper.BarrelledWaterMapper">
+<mapper namespace="com.jsoo.water.mapper.WaterMapper">
     
-    <resultMap type="BarrelledWater" id="BarrelledWaterResult">
+    <resultMap type="Water" id="WaterResult">
         <result property="waterId"    column="water_id"    />
         <result property="waterName"    column="water_name"    />
         <result property="waterType"    column="water_type"    />
@@ -20,12 +20,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
-    <sql id="selectBarrelledWaterVo">
+    <sql id="selectWaterVo">
         select water_id, water_name, water_type, water_capacity, water_price, coupon_price, water_image, del_flag, create_by, create_time, update_by, update_time, remark from jsoo_water
     </sql>
 
-    <select id="selectBarrelledWaterList" parameterType="BarrelledWater" resultMap="BarrelledWaterResult">
-        <include refid="selectBarrelledWaterVo"/>
+    <select id="selectWaterList" parameterType="Water" resultMap="WaterResult">
+        <include refid="selectWaterVo"/>
         where del_flag = 'N'
         <if test="waterName != null  and waterName != ''"> and water_name like concat('%', #{waterName}, '%')</if>
         <if test="waterType != null  and waterType != ''"> and water_type = #{waterType}</if>
@@ -35,12 +35,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="waterImage != null  and waterImage != ''"> and water_image = #{waterImage}</if>
     </select>
     
-    <select id="selectBarrelledWaterByWaterId" parameterType="Long" resultMap="BarrelledWaterResult">
-        <include refid="selectBarrelledWaterVo"/>
+    <select id="selectWaterByWaterId" parameterType="Long" resultMap="WaterResult">
+        <include refid="selectWaterVo"/>
         where water_id = #{waterId}
     </select>
 
-    <insert id="insertBarrelledWater" parameterType="BarrelledWater" useGeneratedKeys="true" keyProperty="waterId">
+    <insert id="insertWater" parameterType="Water" useGeneratedKeys="true" keyProperty="waterId">
         insert into jsoo_water
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="waterName != null">water_name,</if>
@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateBarrelledWater" parameterType="BarrelledWater">
+    <update id="updateWater" parameterType="Water">
         update jsoo_water
         <trim prefix="SET" suffixOverrides=",">
             <if test="waterName != null">water_name = #{waterName},</if>
@@ -91,11 +91,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where water_id = #{waterId}
     </update>
 
-    <delete id="deleteBarrelledWaterByWaterId" parameterType="Long">
+    <delete id="deleteWaterByWaterId" parameterType="Long">
         update jsoo_water set del_flag = 'Y' where water_id = #{waterId}
     </delete>
 
-    <delete id="deleteBarrelledWaterByWaterIds" parameterType="String">
+    <delete id="deleteWaterByWaterIds" parameterType="String">
         update jsoo_water set del_flag = 'Y' where water_id in
         <foreach item="waterId" collection="array" open="(" separator="," close=")">
             #{waterId}

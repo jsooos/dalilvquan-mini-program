@@ -1,7 +1,7 @@
 package com.jsoo.water.service;
 
 import java.util.List;
-import com.jsoo.water.domain.BarrelledWater;
+import com.jsoo.water.domain.Water;
 
 /**
  * 桶装水信息Service接口
@@ -9,7 +9,7 @@ import com.jsoo.water.domain.BarrelledWater;
  * @author 辛浩杰
  * @date 2024-10-30
  */
-public interface IBarrelledWaterService 
+public interface IWaterService
 {
     /**
      * 查询桶装水信息
@@ -17,31 +17,31 @@ public interface IBarrelledWaterService
      * @param waterId 桶装水信息主键
      * @return 桶装水信息
      */
-    public BarrelledWater selectBarrelledWaterByWaterId(Long waterId);
+    public Water selectWaterByWaterId(Long waterId);
 
     /**
      * 查询桶装水信息列表
      * 
-     * @param barrelledWater 桶装水信息
+     * @param water 桶装水信息
      * @return 桶装水信息集合
      */
-    public List<BarrelledWater> selectBarrelledWaterList(BarrelledWater barrelledWater);
+    public List<Water> selectWaterList(Water water);
 
     /**
      * 新增桶装水信息
      * 
-     * @param barrelledWater 桶装水信息
+     * @param water 桶装水信息
      * @return 结果
      */
-    public int insertBarrelledWater(BarrelledWater barrelledWater);
+    public int insertWater(Water water);
 
     /**
      * 修改桶装水信息
      * 
-     * @param barrelledWater 桶装水信息
+     * @param water 桶装水信息
      * @return 结果
      */
-    public int updateBarrelledWater(BarrelledWater barrelledWater);
+    public int updateWater(Water water);
 
     /**
      * 批量删除桶装水信息
@@ -49,7 +49,7 @@ public interface IBarrelledWaterService
      * @param waterIds 需要删除的桶装水信息主键集合
      * @return 结果
      */
-    public int deleteBarrelledWaterByWaterIds(Long[] waterIds);
+    public int deleteWaterByWaterIds(Long[] waterIds);
 
     /**
      * 删除桶装水信息信息
@@ -57,5 +57,5 @@ public interface IBarrelledWaterService
      * @param waterId 桶装水信息主键
      * @return 结果
      */
-    public int deleteBarrelledWaterByWaterId(Long waterId);
+    public int deleteWaterByWaterId(Long waterId);
 }
