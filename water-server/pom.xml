@@ -181,6 +181,7 @@
                 <version>${jsoo.version}</version>
             </dependency>
 
+
         </dependencies>
     </dependencyManagement>
 

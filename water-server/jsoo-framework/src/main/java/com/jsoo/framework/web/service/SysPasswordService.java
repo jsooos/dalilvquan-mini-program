@@ -1,17 +1,16 @@
 package com.jsoo.framework.web.service;
 
-import java.util.concurrent.TimeUnit;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
 import com.jsoo.common.constant.CacheConstants;
 import com.jsoo.common.core.domain.entity.SysUser;
-import com.jsoo.common.core.redis.RedisCache;
 import com.jsoo.common.exception.user.UserPasswordNotMatchException;
 import com.jsoo.common.exception.user.UserPasswordRetryLimitExceedException;
+import com.jsoo.common.utils.CacheUtils;
 import com.jsoo.common.utils.SecurityUtils;
 import com.jsoo.framework.security.context.AuthenticationContextHolder;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.Cache;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
 /**
  * 登录密码方法
@@ -21,9 +20,6 @@ import com.jsoo.framework.security.context.AuthenticationContextHolder;
 @Component
 public class SysPasswordService
 {
-    @Autowired
-    private RedisCache redisCache;
-
     @Value(value = "${user.password.maxRetryCount}")
     private int maxRetryCount;
 
@@ -32,13 +28,12 @@ public class SysPasswordService
 
     /**
      * 登录账户密码错误次数缓存键名
-     * 
-     * @param username 用户名
-     * @return 缓存键key
+     *
+     * @return 缓存Cache
      */
-    private String getCacheKey(String username)
+    private Cache getCache()
     {
-        return CacheConstants.PWD_ERR_CNT_KEY + username;
+        return CacheUtils.getCache(CacheConstants.PWD_ERR_CNT_KEY);
     }
 
     public void validate(SysUser user)
@@ -46,23 +41,19 @@ public class SysPasswordService
         Authentication usernamePasswordAuthenticationToken = AuthenticationContextHolder.getContext();
         String username = usernamePasswordAuthenticationToken.getName();
         String password = usernamePasswordAuthenticationToken.getCredentials().toString();
-
-        Integer retryCount = redisCache.getCacheObject(getCacheKey(username));
-
+        Integer retryCount = getCache().get(username, Integer.class);
         if (retryCount == null)
         {
             retryCount = 0;
         }
-
         if (retryCount >= Integer.valueOf(maxRetryCount).intValue())
         {
             throw new UserPasswordRetryLimitExceedException(maxRetryCount, lockTime);
         }
-
         if (!matches(user, password))
         {
             retryCount = retryCount + 1;
-            redisCache.setCacheObject(getCacheKey(username), retryCount, lockTime, TimeUnit.MINUTES);
+            getCache().put(username, retryCount);
             throw new UserPasswordNotMatchException();
         }
         else
@@ -78,9 +69,6 @@ public class SysPasswordService
 
     public void clearLoginRecordCache(String loginName)
     {
-        if (redisCache.hasKey(getCacheKey(loginName)))
-        {
-            redisCache.deleteObject(getCacheKey(loginName));
-        }
+        getCache().evictIfPresent(loginName);
     }
 }

@@ -1,24 +1,13 @@
 package com.jsoo.framework.web.service;
 
-import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
 import com.jsoo.common.constant.CacheConstants;
 import com.jsoo.common.constant.Constants;
 import com.jsoo.common.constant.UserConstants;
 import com.jsoo.common.core.domain.entity.SysUser;
 import com.jsoo.common.core.domain.model.LoginUser;
-import com.jsoo.common.core.redis.RedisCache;
 import com.jsoo.common.exception.ServiceException;
-import com.jsoo.common.exception.user.BlackListException;
-import com.jsoo.common.exception.user.CaptchaException;
-import com.jsoo.common.exception.user.CaptchaExpireException;
-import com.jsoo.common.exception.user.UserNotExistsException;
-import com.jsoo.common.exception.user.UserPasswordNotMatchException;
+import com.jsoo.common.exception.user.*;
+import com.jsoo.common.utils.CacheUtils;
 import com.jsoo.common.utils.DateUtils;
 import com.jsoo.common.utils.MessageUtils;
 import com.jsoo.common.utils.StringUtils;
@@ -28,6 +17,13 @@ import com.jsoo.framework.manager.factory.AsyncFactory;
 import com.jsoo.framework.security.context.AuthenticationContextHolder;
 import com.jsoo.system.service.ISysConfigService;
 import com.jsoo.system.service.ISysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
+import javax.annotation.Resource;
 
 /**
  * 登录校验方法
@@ -43,9 +39,6 @@ public class SysLoginService
     @Resource
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private RedisCache redisCache;
-    
     @Autowired
     private ISysUserService userService;
 
@@ -113,14 +106,13 @@ public class SysLoginService
         boolean captchaEnabled = configService.selectCaptchaEnabled();
         if (captchaEnabled)
         {
-            String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
-            String captcha = redisCache.getCacheObject(verifyKey);
+            String captcha = CacheUtils.get(CacheConstants.CAPTCHA_CODE_KEY, StringUtils.nvl(uuid, ""), String.class);
+            CacheUtils.removeIfPresent(CacheConstants.CAPTCHA_CODE_KEY, StringUtils.nvl(uuid, ""));
             if (captcha == null)
             {
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
                 throw new CaptchaExpireException();
             }
-            redisCache.deleteObject(verifyKey);
             if (!code.equalsIgnoreCase(captcha))
             {
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
