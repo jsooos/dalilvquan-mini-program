@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "jsoo")
 public class JsooConfig
 {
-    /** 项目名称 */
+    /** 项目名222222称 */
     private String name;
 
     /** 版本 */
